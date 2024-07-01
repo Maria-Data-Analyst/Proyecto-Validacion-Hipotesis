@@ -141,11 +141,61 @@ HAVING
   ------------------------------------------------------------------
 ```
 
-De estas consultas obtuvimos los siguientes duplicados 
+De las consultas aplicadas solo se obtuvo canciones duplicadas en la tabla de Spotify
 
-
+[![Captura-de-pantalla-2024-06-30-193055.png](https://i.postimg.cc/Qdy1CrVk/Captura-de-pantalla-2024-06-30-193055.png)](https://postimg.cc/w1D74ZX7)
    
+Para descartar estos duplicados, primero necesitamos más información. Por lo tanto, profundizamos en las características de las canciones en las demás tablas utilizando la siguiente consulta: 
+```sql
+----- CONSULTA PARA RECTIFICAR INFORMACION 
+----- DE DUPLICADOS HALLADOS EN LA TABLA SPOTIFY 
+----- EN LAS TABLAS TECHNICAL INFO Y COMPETITION
 
+WITH duplicados AS (
+  SELECT
+    *,
+    COUNT(*) OVER (PARTITION BY track_name, artist_s__name) AS cantidad
+  FROM
+    `proyecto-hipotesis-lab2.dataset.track_in_spotify`
+)
 
+SELECT 
+  d.*,
+  t1.*,
+  t2.*
+FROM 
+  duplicados AS d
+LEFT JOIN 
+  `proyecto-hipotesis-lab2.dataset.track_technical_info ` AS t1
+ON 
+  d.track_id = t1.track_id
+LEFT JOIN 
+  `proyecto-hipotesis-lab2.dataset.track_in_competition` AS t2
+ON 
+  d.track_id = t2.track_id
+WHERE 
+  d.cantidad > 1  -- Filtra solo los registros que son duplicados
+ORDER BY 
+  d.track_name;
 
+  ---------------------------------------------------------------------
+```
+Como resultado, observamos que la canción tiene el mismo nombre y es del mismo artista, pero presenta características diferentes. Por lo tanto, no se consideran duplicados y se mantienen en la base de datos.
 
+[![Captura-de-pantalla-2024-06-30-195631.png](https://i.postimg.cc/nLr2BkTW/Captura-de-pantalla-2024-06-30-195631.png)](https://postimg.cc/zLmT1Tsw)
+
+## Identificar y manejar datos discrepantes en variables categóricas
+Para este paso de la limpieza, nos enfocaremos en remover los caracteres especiales de los nombres de los artistas y de sus canciones con la siguiente consulta : 
+```sql
+-- CONSULTA PARA REMOVER LOS CARACTERES ESPECIALES DE LOS NOMBRES DE LOS ARTISTAS Y LAS CANCIONES ---
+SELECT
+  track_name,
+  REGEXP_REPLACE(track_name,r'[^a-zA-Z0-9]', ' ') AS track_name_limpia,
+  artist_s__name,
+  REGEXP_REPLACE(artist_s__name,r'[^a-zA-Z0-9]', ' ') AS artist_s__name_limpia,
+FROM
+  `proyecto-hipotesis-lab2.dataset.track_in_spotify`
+```
+
+Para verificar que la consulta funcionara dejamos la variable original al lado de la nueva variable limpia 
+[![Captura-de-pantalla-2024-06-30-200647.png](https://i.postimg.cc/mks7XNNB/Captura-de-pantalla-2024-06-30-200647.png)](https://postimg.cc/r0fdz4PP)
