@@ -238,3 +238,5 @@ FROM `proyecto-hipotesis-lab2.dataset.track_in_spotify`
 Esta consulta nos permite obtener el siguiente resultado 
 
 [![Captura-de-pantalla-2024-06-30-204433.png](https://i.postimg.cc/59rVC73h/Captura-de-pantalla-2024-06-30-204433.png)](https://postimg.cc/23nMpxgG)
+
+Seguimos con participación total en playlists
