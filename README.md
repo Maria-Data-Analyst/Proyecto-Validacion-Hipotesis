@@ -36,10 +36,9 @@ A continuación, se detallan los pasos necesarios para alcanzar los objetivos pr
 - Google Colab
   
 # Procesamiento y Preparación de la Base de Datos
-
+Inicialmente, se llevarán a cabo consultas individuales para cada punto de esta sección. Posteriormente, combinaremos todas las consultas para crear una vista consolidada y procesada de cada una de las tablas, con el objetivo de unirlas en una tabla general.
 ## Importación de datos
-
-Inicialmente, se trabajará desde BigQuery para hacer la limpieza y la preparación de los datos. Por lo tanto, aquí se subirán las tablas del dataset mencionado anteriormente.
+Importamos nuestro dataset mencionado anteriormente a la herramienta BigQuery como tablas para poder trabajr con su información.
 
 ## Identificar y manejar los valores nulos
 
@@ -196,6 +195,46 @@ SELECT
 FROM
   `proyecto-hipotesis-lab2.dataset.track_in_spotify`
 ```
-
 Para verificar que la consulta funcionara dejamos la variable original al lado de la nueva variable limpia 
 [![Captura-de-pantalla-2024-06-30-200647.png](https://i.postimg.cc/mks7XNNB/Captura-de-pantalla-2024-06-30-200647.png)](https://postimg.cc/r0fdz4PP)
+
+## Identificar y manejar datos discrepantes en variables numéricas
+Observando las variables de la tabla "Track in Spotify", encontramos que la variable streams es de tipo String. Esto podría deberse a la presencia de algún valor no numérico que está afectando la variable completa. Para solucionar esto, realizaremos una consulta para identificar dichos valores: 
+```sql
+---CONSULTA PARA ENCONTRAR CADENA DE TEXTO ----
+SELECT 
+track_id,
+streams
+FROM `proyecto-hipotesis-lab2.dataset.track_in_spotify` 
+WHERE NOT REGEXP_CONTAINS(streams, r'^[0-9]+$')
+```
+[![Captura-de-pantalla-2024-06-30-202317.png](https://i.postimg.cc/zX9qGt8H/Captura-de-pantalla-2024-06-30-202317.png)](https://postimg.cc/jLQp8hWR)
+
+Despues de identificar el valor discrepante en la variable utilizamos la siguiente consulta para convertir toda la variable en **Integer** y así más adelante poder realizar  operaciones matemáticas con ella 
+
+```sql
+---CONSULTA PARA CONVERTIR LA VARIABLE STREAM DE TIPO STRING A INTEGER ----
+SELECT 
+  *,
+  IF(REGEXP_CONTAINS(streams, r'^[0-9]+$'), CAST(streams AS INT64), NULL) AS stream_limpio
+FROM 
+  `proyecto-hipotesis-lab2.dataset.track_in_spotify`
+```
+
+## Crear nuevas variables
+Parte del proceso de procesamiento de datos implica crear nuevas variables que nos ayuden a comprender y gestionar mejor los datos disponibles. En este sentido, vamos a crear dos nuevas variables: una para la fecha de lanzamiento de la canción y otra para la participación total en playlists.
+
+Comenzaremos con la fecha_lanzamiento : 
+
+```sql
+--- CONSULTA PARA CREAR LA VARIBLE FECHA DE LANZAMIENTO ---
+SELECT  
+track_name,
+artist_s__name,
+CAST(CONCAT(released_year, '-',released_month, '-',released_day)AS DATE) AS fecha_lanzamiento
+FROM `proyecto-hipotesis-lab2.dataset.track_in_spotify` 
+```
+
+Esta consulta nos permite obtener el siguiente resultado 
+
+[![Captura-de-pantalla-2024-06-30-204433.png](https://i.postimg.cc/59rVC73h/Captura-de-pantalla-2024-06-30-204433.png)](https://postimg.cc/23nMpxgG)
