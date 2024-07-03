@@ -95,7 +95,7 @@ FROM
 ```
 
 
-De la consulta obtuvimos que la variable **key** tenía 95 valores nulos, lo que representa el 10 % de los datos. Por lo tanto, se tomó la decisión de eliminar esta variable. También encontramos 50 valores nulos en la variable **in_shazam_charts**; sin embargo, decidimos conservarla ya que necesitaremos esta variable más adelante.
+De la consulta obtuvimos que la variable **key** de la tabla Technical info tenía 95 valores nulos, lo que representa el 10 % de los datos. Por lo tanto, se tomó la decisión de eliminar esta variable. También encontramos 50 valores nulos en la variable **in_shazam_charts** de la tabla COmpetition ; sin embargo, decidimos conservarla ya que necesitaremos esta variable más adelante. Para la tabla Spotify no encontramos valores nulos.
 
 ## Identificar y manejar valores duplicados
 vrificamos los duplicados de todas las tablas con las siguientes Queries : 
@@ -179,7 +179,7 @@ ORDER BY
 
   ---------------------------------------------------------------------
 ```
-Como resultado, observamos que la canción tiene el mismo nombre y es del mismo artista, pero presenta características diferentes. Por lo tanto, no se consideran duplicados y se mantienen en la base de datos.
+Como resultado, observamos que la canción tiene el mismo nombre y es del mismo artista, pero presentan características diferentes. Por lo tanto, no se consideran duplicados y se mantienen en la base de datos.
 
 [![Captura-de-pantalla-2024-06-30-195631.png](https://i.postimg.cc/nLr2BkTW/Captura-de-pantalla-2024-06-30-195631.png)](https://postimg.cc/zLmT1Tsw)
 
@@ -240,3 +240,53 @@ Esta consulta nos permite obtener el siguiente resultado
 [![Captura-de-pantalla-2024-06-30-204433.png](https://i.postimg.cc/59rVC73h/Captura-de-pantalla-2024-06-30-204433.png)](https://postimg.cc/23nMpxgG)
 
 Seguimos con participación total en playlists
+
+```sql
+SELECT 
+ s.track_id,
+  s.artist_s__name,
+  s.track_name,
+  COALESCE(c.in_apple_playlists, 0) AS apple_music_playlists,
+  COALESCE(c.in_deezer_playlists, 0) AS deezer_playlists,
+  COALESCE(s.in_spotify_playlists, 0) AS spotify_playlists,
+  COALESCE(c.in_apple_playlists, 0) + COALESCE(c.in_deezer_playlists, 0) + COALESCE(s.in_spotify_playlists, 0) AS total_playlists
+FROM 
+  `proyecto-hipotesis-lab2.dataset.track_in_competition` AS c
+LEFT JOIN 
+  `proyecto-hipotesis-lab2.dataset.track_in_spotify` AS s
+ON 
+  c.track_id = s.track_id
+```
+
+Con esta consulta, podemos observar la participación en playlists de cada aplicación y el total acumulado 
+[![Captura-de-pantalla-2024-07-02-213758.png](https://i.postimg.cc/R0597Cnt/Captura-de-pantalla-2024-07-02-213758.png)](https://postimg.cc/w1VSHp2x)
+
+
+## Unir tablas
+Para unir las tablas, primero crearemos vistas limpias correspondientes a cada una utilizando las consultas anteriores de la siguiente manera:
+### Vista limpia track_in_spotify
+  * Limpieza de caracteres especiales para las varibles track_name y artist__s__name
+  * creación de la variable fecha_lanzamiento
+  * Identificar valores atípicos en la variable **streams** y convertirlos en valores nulos. Para todos los demás valores, realizar la conversión a tipo **Integer**
+  * Manejar el valor null de Streams
+
+``` sql
+---- Vista limpia de la tabla track_in_spotify ----
+SELECT 
+track_id,
+REGEXP_REPLACE(track_name,r'[^a-zA-Z0-9]', ' ') AS track_name_limpio,
+REGEXP_REPLACE(artist_s__name,r'[^a-zA-Z0-9]', ' ') AS artist_s__name_limpio,
+artist_count,
+released_year,
+released_month,
+released_day,
+CAST(CONCAT(released_year, '-',released_month, '-',released_day)AS DATE) AS fecha_lanzamiento,
+in_spotify_playlists,
+in_spotify_charts,
+ IF(REGEXP_CONTAINS(streams, r'^[0-9]+$'), CAST(streams AS INT64), NULL) AS streams_limpio
+
+ FROM `proyecto-hipotesis-lab2.dataset.track_in_spotify` 
+ WHERE 
+ IF(REGEXP_CONTAINS(streams, r'^[0-9]+$'), CAST(streams AS INT64), NULL) IS NOT NULL;
+
+```
