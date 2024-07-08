@@ -264,6 +264,7 @@ Con esta consulta, podemos observar la participación en playlists de cada aplic
 
 ## Unir tablas
 Para unir las tablas, primero crearemos vistas limpias correspondientes a cada una utilizando las consultas anteriores de la siguiente manera:
+
 ### Vista limpia track_in_spotify
   * Limpieza de caracteres especiales para las varibles track_name y artist__s__name
   * creación de la variable fecha_lanzamiento
@@ -289,4 +290,24 @@ in_spotify_charts,
  WHERE 
  IF(REGEXP_CONTAINS(streams, r'^[0-9]+$'), CAST(streams AS INT64), NULL) IS NOT NULL;
 
+```
+
+## Vista limpia de la tabla track_technical_info
+  * Remover la variable key debido a la cantidad de nulos que presenta 
+
+``` sql
+--- Vista limpia tabla track_technical_limpia---
+ SELECT 
+*
+EXCEPT(key)
+ FROM `proyecto-hipotesis-lab2.dataset.track_technical_info ` 
+```
+## Vista limpia de la tabla track_in_competition
+No es necesario hacer cambios en esta tabla por ahora. Sin embargo, la crearemos como una vista para tenerla lista, lo que nos permitirá editarla o complementarla en el futuro
+
+``` sql
+----- Tabla track in competition -------
+SELECT
+  *,
+FROM `proyecto-hipotesis-lab2.dataset.track_in_competition`
 ```
