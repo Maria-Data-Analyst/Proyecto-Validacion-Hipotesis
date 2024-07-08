@@ -311,3 +311,51 @@ SELECT
   *,
 FROM `proyecto-hipotesis-lab2.dataset.track_in_competition`
 ```
+
+Con estas tres vistas limpias, creamos el siguiente código para conformar la vista de la tabla general, en la que también añadimos la variable total_playlist
+
+## Vista de la tabla_general
+
+``` sql
+---- Tabla General---
+SELECT
+  tabla_spotify.track_id,
+  tabla_spotify.track_name_limpio,
+  tabla_spotify.artist_s__name_limpio,
+  tabla_spotify.artist_count,
+  tabla_spotify.released_year,
+  tabla_spotify.released_month,
+  tabla_spotify.released_day,
+  tabla_spotify.fecha_lanzamiento,
+  tabla_spotify.in_spotify_playlists,
+  tabla_spotify.in_spotify_charts,
+  tabla_spotify.streams_limpio,
+  tabla_competition.in_apple_playlists,
+  tabla_competition.in_apple_charts,
+  tabla_competition.in_deezer_playlists,
+  tabla_competition.in_deezer_charts,
+  tabla_competition.in_shazam_charts,
+  tabla_technical.mode,
+  tabla_technical.bpm,
+  tabla_technical.`danceability_%` AS dance_porcentaje,
+  tabla_technical.`valence_%` AS valence_porcentaje,
+  tabla_technical.`energy_%` AS energy_porcentaje,
+  tabla_technical.`acousticness_%` AS acoustic_porcentaje,
+  tabla_technical.`instrumentalness_%` AS instrumental_porcentaje,
+  tabla_technical.`liveness_%` AS live_porcentaje,
+  tabla_technical.`speechiness_%` AS speech_porcentaje,
+  COALESCE(tabla_competition.in_apple_playlists, 0) AS apple_music_playlists,
+  COALESCE(tabla_competition.in_deezer_playlists, 0) AS deezer_playlists,
+  COALESCE(tabla_spotify.in_spotify_playlists, 0) AS spotify_playlists,
+  COALESCE(tabla_competition.in_apple_playlists, 0) + COALESCE(tabla_competition.in_deezer_playlists, 0) + COALESCE(tabla_spotify.in_spotify_playlists, 0) AS total_playlists
+FROM
+  `proyecto-hipotesis-lab2.dataset.track_technical_limpia` tabla_technical
+INNER JOIN
+  `proyecto-hipotesis-lab2.dataset.track_spotify_limpia` tabla_spotify
+ON
+  tabla_technical.track_id = tabla_spotify.track_id
+INNER JOIN
+  `proyecto-hipotesis-lab2.dataset.track_in_competition_limpia` tabla_competition
+ON
+  tabla_technical.track_id = tabla_competition.track_id;
+```
