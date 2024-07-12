@@ -187,18 +187,25 @@ ON
 ```
 ## Calcular correlación entre variables
 
-Desde BigQuery, utilizando la función CORR, vamos a calcular la correlación entre dos variables continuas: streams y playlists, así como streams y danceability. Para esto, haremos una consulta utilizando los datos de nuestra tabla general en la que hemos estado trabajando. La consulta sería la siguiente:
+Desde BigQuery, utilizando la función CORR vamos a calcular la correlacion entre Streams y las variables de las hipotesisi planteadas:
 
 ``` sql
 SELECT 
 CORR(streams_limpio,total_playlists ) AS corr_streams_playlist,
-CORR(streams_limpio,dance_porcentaje )AS corre_streams_dance
-FROM `proyecto-hipotesis-lab2.dataset.tabla_generall` LIMIT 1000
+CORR(streams_limpio,dance_porcentaje )AS corre_streams_dance,
+CORR(streams_limpio,live_porcentaje )AS corre_streams_live,
+CORR(streams_limpio,acoustic_porcentaje )AS corre_streams_acoustic,
+CORR(streams_limpio,energy_porcentaje )AS corre_streams_energy,
+CORR(streams_limpio,instrumental_porcentaje )AS corre_streams_instrumental,
+CORR(streams_limpio,valence_porcentaje )AS corre_streams_valence,
+CORR(streams_limpio,speech_porcentaje )AS corre_streams_speech,
+CORR(streams_limpio,bpm)AS corre_streams_bpm
+ FROM `proyecto-hipotesis-lab2.dataset.tabla_generall` LIMIT 1000
 ```
-Estas correlaciones nos arrojan los siguientes resultados: 
+Algunos resultados de correlaciones son los siguientes: 
 * corr_streams_playlist : 0.78303914505750527
 * corre_streams_dance : -0.10545688369141912
 
-Este ejercicio nos sirve como fundamento para validar las hipótesis planteadas en este proyecto, ya que la correlación se emplea para determinar la fuerza y dirección de la relación entre dos variables.
+Este ejercicio sirve como base para validar las hipótesis planteadas en este proyecto, ya que la correlación se utiliza para determinar la fuerza y la dirección de la relación entre dos variables. En el siguiente paso, profundizaremos en el análisis de la correlación y su relevancia para este proyecto
 
 Podemos continuar con el siguiente paso del proceso [Aplicar técnica de análisis](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Tecnica-Analisis)
