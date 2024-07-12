@@ -22,7 +22,7 @@ A continuación, se detallan los pasos necesarios para alcanzar los objetivos pr
    - Exploración de tendencias y patrones.
    - Identificación de variables relevantes.
    
-3. **Aplicación de Técnicas de Análisis**
+3. [**Aplicación de Técnicas de Análisis**](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Tecnica-Analisis)
    - Selección y aplicación de métodos analíticos adecuados.
    - Interpretación de resultados preliminares.
    
