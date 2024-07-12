@@ -14,11 +14,11 @@ Para llevar a cabo el análisis de estas hipótesis, la discográfica pone a dis
 
 A continuación, se detallan los pasos necesarios para alcanzar los objetivos propuestos en el proyecto:
 
-1. **Procesamiento y Preparación de la Base de Datos**
+1. [**Procesamiento y Preparación de la Base de Datos**](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Procesamiento)
    - Recopilación y limpieza de datos.
    - Transformación y estructuración de la información.
    
-2. **Análisis Exploratorio de Datos**
+2. [**Análisis Exploratorio de Datos**](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Exploracion)
    - Exploración de tendencias y patrones.
    - Identificación de variables relevantes.
    
