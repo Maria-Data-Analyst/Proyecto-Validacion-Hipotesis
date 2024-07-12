@@ -9,7 +9,7 @@ Una discográfica se enfrenta al desafío de lanzar un nuevo artista en el escen
 * Los artistas con un mayor número de canciones en Spotify obtienen más streams.
 * Las características específicas de una canción influyen en su éxito en términos de cantidad de streams.
   
-Para llevar a cabo el análisis de estas hipótesis, la discográfica pone a disposición un [dataset](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/blob/Consultas-Query/track_in_spotify%20-%20spotify.csv) de Spotify con información sobre las canciones más escuchadas en 2023. El objetivo de este análisis es validar o refutar estas hipótesis mediante el estudio de los datos, y proporcionar recomendaciones estratégicas basadas en los hallazgos. En última instancia, se busca que la discográfica y el nuevo artista puedan tomar decisiones informadas que aumenten sus posibilidades de éxito.
+Para llevar a cabo el análisis de estas hipótesis, la discográfica pone a disposición un [dataset](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/dataset) de Spotify con información sobre las canciones más escuchadas en 2023. El objetivo de este análisis es validar o refutar estas hipótesis mediante el estudio de los datos, y proporcionar recomendaciones estratégicas basadas en los hallazgos. En última instancia, se busca que la discográfica y el nuevo artista puedan tomar decisiones informadas que aumenten sus posibilidades de éxito.
 ### Índice
 
 A continuación, se detallan los pasos necesarios para alcanzar los objetivos propuestos en el proyecto:
