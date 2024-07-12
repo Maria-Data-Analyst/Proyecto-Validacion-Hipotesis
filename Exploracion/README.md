@@ -187,20 +187,86 @@ ON
 ```
 ## Calcular correlación entre variables
 
-Desde BigQuery, utilizando la función CORR vamos a calcular la correlacion entre Streams y las variables de las hipotesisi planteadas:
+Desde BigQuery, utilizando la función CORR vamos a calcular las correlaciones necesarias para cada una de las hipotesis:
 
 ``` sql
-SELECT 
-CORR(streams_limpio,total_playlists ) AS corr_streams_playlist,
-CORR(streams_limpio,dance_porcentaje )AS corre_streams_dance,
-CORR(streams_limpio,live_porcentaje )AS corre_streams_live,
-CORR(streams_limpio,acoustic_porcentaje )AS corre_streams_acoustic,
-CORR(streams_limpio,energy_porcentaje )AS corre_streams_energy,
-CORR(streams_limpio,instrumental_porcentaje )AS corre_streams_instrumental,
-CORR(streams_limpio,valence_porcentaje )AS corre_streams_valence,
-CORR(streams_limpio,speech_porcentaje )AS corre_streams_speech,
-CORR(streams_limpio,bpm)AS corre_streams_bpm
- FROM `proyecto-hipotesis-lab2.dataset.tabla_generall` LIMIT 1000
+-------------- Consulta de Correlaciones ------------------
+WITH artist_songs AS (
+  SELECT
+    artist_s__name_limpio,
+    COUNT(DISTINCT track_id) AS tracks_totales,
+    SUM(streams_limpio) AS total_streams
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+  
+  GROUP BY artist_s__name_limpio
+),
+
+correlacion_canciones_total_streams AS (
+  SELECT
+    CORR(tracks_totales, total_streams) AS correlacion_streams_canciones
+  FROM artist_songs
+),
+
+correlacion_playlist_total_streams AS (
+  SELECT
+    CORR(total_playlists, streams_limpio) AS correlacion_streams_playlist
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+ 
+),
+
+correlacion_charts_deezer_spotify AS (
+  SELECT
+    CORR(in_spotify_charts, in_deezer_charts) AS correlacion_charts_deezer
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+ 
+),
+
+correlacion_charts_apple_spotify AS (
+  SELECT
+    CORR(in_spotify_charts, in_apple_charts) AS correlacion_charts_apple
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+ 
+),
+correlacion_charts_shazam_spotify AS (
+  SELECT
+    CORR(in_spotify_charts, in_shazam_charts) AS correlacion_charts_shazam
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+ 
+),
+correlacion_bpm_streams AS (
+  SELECT
+    CORR(bpm, streams_limpio) AS correlacion_bpm
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+ 
+),
+correlacion_caracteristicas_streams AS (
+  SELECT
+   
+  CORR(streams_limpio,dance_porcentaje )AS corre_streams_dance,
+  CORR(streams_limpio,live_porcentaje )AS corre_streams_live,
+  CORR(streams_limpio,acoustic_porcentaje )AS corre_streams_acoustic,
+  CORR(streams_limpio,energy_porcentaje )AS corre_streams_energy,
+  CORR(streams_limpio,instrumental_porcentaje )AS corre_streams_instrumental,
+  CORR(streams_limpio,valence_porcentaje )AS corre_streams_valence,
+  CORR(streams_limpio,speech_porcentaje )AS corre_streams_speech,
+  FROM `proyecto-hipotesis-lab2.dataset.tabla_generall`
+ 
+)
+
+SELECT
+  (SELECT correlacion_streams_canciones FROM correlacion_canciones_total_streams) AS correlacion_canciones_total_streams,
+  (SELECT correlacion_streams_playlist FROM correlacion_playlist_total_streams) AS correlacion_playlist_total_streams,
+  (SELECT correlacion_charts_deezer FROM correlacion_charts_deezer_spotify) AS correlacion_charts_deezer_spotify,
+  (SELECT correlacion_charts_apple FROM correlacion_charts_apple_spotify) AS correlacion_charts_apple_spotify,
+  (SELECT correlacion_charts_shazam FROM correlacion_charts_shazam_spotify) AS correlacion_charts_shazam_spotify,
+  (SELECT correlacion_bpm FROM correlacion_bpm_streams) AS correlacion_bpm_streams,
+  (SELECT corre_streams_dance FROM correlacion_caracteristicas_streams) AS correlacion_dance_streams,
+  (SELECT corre_streams_live FROM correlacion_caracteristicas_streams) AS correlacion_live_streams,
+  (SELECT corre_streams_acoustic FROM correlacion_caracteristicas_streams) AS correlacion_acoustic_streams,
+  (SELECT corre_streams_energy FROM correlacion_caracteristicas_streams) AS correlacion_energy_streams,
+  (SELECT corre_streams_instrumental FROM correlacion_caracteristicas_streams) AS correlacion_instrumental_streams,
+  (SELECT corre_streams_valence FROM correlacion_caracteristicas_streams) AS correlacion_valence_streams,
+  (SELECT corre_streams_speech FROM correlacion_caracteristicas_streams) AS correlacion_speeche_streams;
 ```
 Algunos resultados de correlaciones son los siguientes: 
 * corr_streams_playlist : 0.78303914505750527
