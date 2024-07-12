@@ -5,6 +5,7 @@ Para el análisis exploratorio, vincularemos nuestra tabla principal en BigQuery
 En este paso, agruparemos los datos según variables categóricas como "artista" y "año de lanzamiento". Utilizaremos matrices en Power BI para determinar la cantidad de tracks por artista y la cantidad de tracks por año de lanzamiento.
 ![image](https://github.com/user-attachments/assets/aef3adbc-7f14-415f-938b-932c4643033d)
 
+
 ##  Visualización de Variables Categóricas
 A través de gráficos de barras, visualizar las variables categóricas
 
@@ -13,9 +14,13 @@ Para mejorar la visualización del gráfico, hemos añadido un filtro que permit
 
 ![image](https://github.com/user-attachments/assets/b57aa1f2-ea3a-40f9-bd16-3c766fa95056)
 
+En el gráfico observamos el rango de años de las canciones agregadas y el conteo por año. Destaca notablemente el año 2022, con un total de 402 canciones, indicando así el año con la mayor cantidad de canciones en el top
+
 ### Cantidad de tracks por artista
 
 ![image](https://github.com/user-attachments/assets/e47811b9-e4cb-4f28-abff-966eed543c20)
+
+Este paso nos permite identificar rápidamente los datos atípicos, que corresponden a los 16 artistas que tienen más de 4 canciones
 
 ## Calcular Medidas de Tendencia Central
 Utilizando tablas en Power BI, vamos a calcular las medidas de tendencia central para las siguientes métricas:
@@ -24,6 +29,9 @@ Utilizando tablas en Power BI, vamos a calcular las medidas de tendencia central
 * total_participation_playlist: Calcular máximo, mínimo, desviación estándar , media, mediana y moda del número total de veces que aparece en una playlist
 
 ![image](https://github.com/user-attachments/assets/25551228-e4c0-4cb0-9a8d-1a954095173b)
+
+Al observar los resultados, notamos que la mediana es significativamente menor que el promedio para ambas variables. Esto sugiere la presencia de algunos artistas con una participación muy alta en playlists y otros con valores muy altos en streams, los cuales están sesgando el promedio hacia arriba. Este patrón podría indicar una distribución sesgada a la derecha (positivamente sesgada), donde la mayoría de los artistas tienen valores más bajos, pero algunos muestran valores considerablemente más altos.
+También podemos concluir que, al ser la desviación estándar considerablemente mayor que el promedio en ambos casos, los datos exhiben un alto grado de variabilidad
 
 ## Visualización de Distribución
 Vamos a visualizar la distribución utilizando un histograma para las variables de streams y total_participation_playlist. Para generar este gráfico, utilizaremos código de Python dentro de Power BI. Esto nos permitirá codificar el histograma usando los datos de Power BI en lenguaje Python
@@ -58,6 +66,8 @@ plt.title('Histograma')
 plt.show()
 ```
 ![image](https://github.com/user-attachments/assets/30c1475d-f231-485f-88bc-2ffdc7d91fcb)
+
+Estos histogramas confirman los resultados del punto anterior, ya que se observa claramente el sesgo hacia la derecha en ambas gráficas para las dos variables
 
 ##  Visualizar el comportamiento de los datos a lo largo del tiempo
 Visualizar a través de gráficos de líneas, el comportamiento de los datos a lo largo del tiempo para streams y total_participation_playlist
@@ -175,3 +185,20 @@ LEFT JOIN
 ON
   tabla_spotify.artist_s__name_limpio = tcs.artist_s__name_limpio;
 ```
+## Calcular correlación entre variables
+
+Desde BigQuery, utilizando la función CORR, vamos a calcular la correlación entre dos variables continuas: streams y playlists, así como streams y danceability. Para esto, haremos una consulta utilizando los datos de nuestra tabla general en la que hemos estado trabajando. La consulta sería la siguiente:
+
+``` sql
+SELECT 
+CORR(streams_limpio,total_playlists ) AS corr_streams_playlist,
+CORR(streams_limpio,dance_porcentaje )AS corre_streams_dance
+FROM `proyecto-hipotesis-lab2.dataset.tabla_generall` LIMIT 1000
+```
+Estas correlaciones nos arrojan los siguientes resultados: 
+* corr_streams_playlist : 0.78303914505750527
+* corre_streams_dance : -0.10545688369141912
+
+Este ejercicio nos sirve como fundamento para validar las hipótesis planteadas en este proyecto, ya que la correlación se emplea para determinar la fuerza y dirección de la relación entre dos variables.
+
+Podemos continuar con el siguiente paso del proceso [Aplicar técnica de análisis](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Tecnica-Analisis)
