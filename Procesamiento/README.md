@@ -386,3 +386,4 @@ LEFT JOIN
 ON
   tabla_spotify.artist_s__name_limpio = tcs.artist_s__name_limpio;
 ```
+Hasta este punto, hemos completado el procesamiento y limpieza de la base de datos. Ahora procederemos con el [Análisis Exploratorio](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Exploracion)
