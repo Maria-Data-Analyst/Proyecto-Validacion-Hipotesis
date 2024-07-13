@@ -23,7 +23,7 @@ Los resultados obtenidos muestran que la correlación entre el BPM y la cantidad
 Las canciones más populares en el ranking de Spotify también muestran un comportamiento similar en otras plataformas como Deezer. Para explorar esta hipótesis en mayor detalle, se analizó  el comportamiento de las canciones lanzadas en el año 2023.
 
 #### Spotify y Deezer
-- **Correlación de Pearson General**:0.6001
+- **Correlación de Pearson General**: 0.6001
   
   ![image](https://github.com/user-attachments/assets/0e1011db-99ac-440b-aebe-fa8c9db44588)
 
@@ -34,7 +34,7 @@ Las canciones más populares en el ranking de Spotify también muestran un compo
 
 
  * #### Spotify y Apple
-    *  **Correlación de Pearson General**:0.5512
+    *  **Correlación de Pearson General**: 0.5512
   
   ![image](https://github.com/user-attachments/assets/38d08715-9b83-4418-aef3-950d5e2ea52e)
 
@@ -44,7 +44,7 @@ Las canciones más populares en el ranking de Spotify también muestran un compo
     ![image](https://github.com/user-attachments/assets/15fda496-94cc-4fe6-bac7-38cac259bb1a)
 
  * #### Spotify y Shazam
-   *   **Correlación de Pearson General**:0.6029
+   *   **Correlación de Pearson General**: 0.6029
 
 ![image](https://github.com/user-attachments/assets/ecfc2c71-ddc5-4be6-9fb9-e314dbc697cd)
 
@@ -66,7 +66,7 @@ Estos resultados respaldan la hipótesis de que las canciones más populares en 
 ### Hipótesis 3
 La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams. Se investigó especialmente esta relación para las canciones lanzadas en el año 2023, analizando su correlación como nuevas en el mercado musical
 
-- **Correlación de Pearson General**:0.7830
+- **Correlación de Pearson General**: 0.7830
 
   ![image](https://github.com/user-attachments/assets/8d868156-bb54-4d7f-a92e-365b3bf0d403)
 
@@ -101,40 +101,41 @@ La fuerte correlación positiva sugiere que, en general, el número de canciones
 ### Hipótesis 5
 Las características específicas de una canción influyen en su éxito en términos de cantidad de streams
 * #### Valance / Positividad
-   **Correlación de Pearson**:-0.0408
+   **Correlación de Pearson**: -0.0408
 
 ![image](https://github.com/user-attachments/assets/2e55b52b-c2c0-4016-8d48-f07ff78f92e2)
 
 
 * #### Acoustic / Acústico
-   **Correlación de Pearson**:-0.0045
+   **Correlación de Pearson**: -0.0045
 
 ![image](https://github.com/user-attachments/assets/713e57b0-1887-4a22-b3a1-bd1184c6e0d8)
 
 
 * #### Danceability/ Bailablidad
-   **Correlación de Pearson**:-0.1054
+   **Correlación de Pearson**: -0.1054
 
 ![image](https://github.com/user-attachments/assets/b51c17c9-7164-4796-be62-8dafc1514e36)
 
 * #### Speechness/ Discurso
-   **Correlación de Pearson**:-0.1123
+   **Correlación de Pearson**: -0.1123
 
 ![image](https://github.com/user-attachments/assets/21f61e80-affe-4b11-9981-31dca6367dea)
 
 * #### Liveness / En vivo
-   **Correlación de Pearson**:-0.0483
+   **Correlación de Pearson**: -0.0483
 
  ![image](https://github.com/user-attachments/assets/9bd65e14-835b-4405-9ecb-779128a6c217)
 
  * #### Energy / Energía
-     **Correlación de Pearson**:-0.0260
+     **Correlación de Pearson**: -0.0260
 
  ![image](https://github.com/user-attachments/assets/a5b368d2-58bd-4929-8887-5e61dcb1df13)
 
 
   * #### Instrumentality / Instrumental
-     **Correlación de Pearson**:-0.0449
+     **Correlación de Pearson**: -0.0449
+    
     ![image](https://github.com/user-attachments/assets/2c09713c-689c-4245-a8f5-6049298a38c0)
 
  
