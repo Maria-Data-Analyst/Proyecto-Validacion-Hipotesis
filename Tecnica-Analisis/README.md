@@ -148,5 +148,5 @@ Además, los gráficos de dispersión correspondientes confirman esta falta de r
 Por lo tanto, se rechaza la hipótesis de que las características específicas de una canción influyen en su éxito medido por la cantidad de streams
 
 
-
+Con esto concluimos el análisis y aquí puedes ver la presentación final:   [Presentación Final](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Tecnica-Analisis)
 
