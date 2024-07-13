@@ -26,7 +26,7 @@ A continuación, se detallan los pasos necesarios para alcanzar los objetivos pr
    - Selección y aplicación de métodos analíticos adecuados.
    - Interpretación de resultados preliminares.
    
-4. **Presentación de Resultados**
+4. [**Presentación de Resultados**](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Presentaci%C3%B3n_resultados)
    - Comunicación clara de hallazgos y conclusiones.
    - Recomendaciones estratégicas basadas en los resultados obtenidos.
 ### Herramientas y Lenguajes 
