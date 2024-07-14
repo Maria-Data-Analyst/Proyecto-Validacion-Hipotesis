@@ -29,6 +29,7 @@ A continuación, se detallan los pasos necesarios para alcanzar los objetivos pr
 4. [**Presentación de Resultados**](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Presentacion)
    - Comunicación clara de hallazgos y conclusiones.
    - Recomendaciones estratégicas basadas en los resultados obtenidos.
+   - [Dashboard](https://github.com/Maria-Data-Analyst/Proyecto-Validacion-Hipotesis/tree/main/Dashboard#readme)
 ### Herramientas y Lenguajes 
 - BigQuery
 - Sql
