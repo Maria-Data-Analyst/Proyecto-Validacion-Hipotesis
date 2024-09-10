@@ -36,4 +36,7 @@ A continuación, se detallan los pasos necesarios para alcanzar los objetivos pr
 - Power BI
 - Python
 - Google Colab
+### Analistas
+- Karen Fonseca
+- María Cortés
   
