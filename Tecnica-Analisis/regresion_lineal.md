@@ -9,7 +9,9 @@ Aplicaremos la regresión lineal para cada una de las hipótesis:
 
 ![Captura de pantalla 2024-09-11 160633](https://github.com/user-attachments/assets/e44e153c-8f9c-4b10-a4b7-2f11a8961dbb)
 
-Los resultados del modelo de regresión lineal no apoyan la hipótesis de que las canciones con un mayor BPM tienen más éxito en términos de streams en Spotify. El coeficiente negativo sugiere una relación inversa como ya habiamos visto en la correlación, pero el valor p extremadamente alto y el R-squared muy bajo indican que esta relación no es significativa ni explicativa. Por lo tanto, no hay evidencia suficiente en estos datos para concluir que el BPM tenga un impacto importante en los streams de Spotify. **Hipótesis Rechazada**
+Los resultados del modelo de regresión lineal no apoyan la hipótesis de que las canciones con un mayor BPM tienen más éxito en términos de streams en Spotify. El coeficiente negativo sugiere una relación inversa como ya habiamos visto en la correlación, pero el valor p extremadamente alto y el R-squared muy bajo indican que esta relación no es significativa ni explicativa. Por lo tanto, no hay evidencia suficiente en estos datos para concluir que el BPM tenga un impacto importante en los streams de Spotify. 
+
+**Hipótesis Rechazada**
 
 ## Hipótesis 2: Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer
 
@@ -47,7 +49,9 @@ Los resultados del modelo de regresión lineal no apoyan la hipótesis de que la
 
 #### Conclusión:
 
-Los resultados del modelo sugieren que hay una relación significativa entre los rankings en otras plataformas y el ranking en Spotify. En particular, el ranking en Deezer tiene una mayor influencia en el ranking en Spotify en comparación con el ranking en Apple. Dado que ambos coeficientes son significativos y el modelo explica una parte sustancial de la variabilidad en los rankings de Spotify, se puede concluir que las canciones populares en Spotify tienden a ser también populares en otras plataformas, aunque la influencia de Deezer es más fuerte en este caso.**Hipótesis Validada**
+Los resultados del modelo sugieren que hay una relación significativa entre los rankings en otras plataformas y el ranking en Spotify. En particular, el ranking en Deezer tiene una mayor influencia en el ranking en Spotify en comparación con el ranking en Apple. Dado que ambos coeficientes son significativos y el modelo explica una parte sustancial de la variabilidad en los rankings de Spotify, se puede concluir que las canciones populares en Spotify tienden a ser también populares en otras plataformas, aunque la influencia de Deezer es más fuerte en este caso.
+
+**Hipótesis Validada**
 
 ## Hipótesis 3:La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams
 
@@ -77,7 +81,9 @@ Los resultados del modelo sugieren que hay una relación significativa entre los
 
 ### Conclusión
 
-Los resultados sugieren que hay una relación positiva significativa entre el número de playlists en las que aparece una canción y el número de streams que recibe. En promedio, cada incremento en el número de playlists está asociado con un aumento considerable en el número de streams. El modelo explica más del 60% de la variabilidad en el número de streams, lo cual es bastante bueno, lo que indica que la presencia en múltiples playlists es un factor importante para el éxito de una canción en términos de streams.**Hipótesis Validada**
+Los resultados sugieren que hay una relación positiva significativa entre el número de playlists en las que aparece una canción y el número de streams que recibe. En promedio, cada incremento en el número de playlists está asociado con un aumento considerable en el número de streams. El modelo explica más del 60% de la variabilidad en el número de streams, lo cual es bastante bueno, lo que indica que la presencia en múltiples playlists es un factor importante para el éxito de una canción en términos de streams.
+
+**Hipótesis Validada**
 
 ## Hipótesis 4: Los artistas con un mayor número de canciones en Spotify tienen más streams
 
@@ -99,7 +105,9 @@ Los resultados sugieren que hay una relación positiva significativa entre el n�
 
 ### Conclusiones
 
-El análisis muestra que el número de canciones que un artista tiene en Spotify es un predictor altamente significativo del número de streams. Esto refuerza la hipótesis de que los artistas con más canciones tienden a tener más éxito en términos de streams. Además el valor de R-squared del 60.99% indica que el número de canciones explica una porción significativa de la variación en los streams. **Hipótesis Validada**
+El análisis muestra que el número de canciones que un artista tiene en Spotify es un predictor altamente significativo del número de streams. Esto refuerza la hipótesis de que los artistas con más canciones tienden a tener más éxito en términos de streams. Además el valor de R-squared del 60.99% indica que el número de canciones explica una porción significativa de la variación en los streams. 
+
+**Hipótesis Validada**
 
 ## Hipótesis 5: Las características de la canción influyen en el éxito en términos de streams en Spotify
 
